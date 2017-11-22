@@ -19,7 +19,7 @@ def main():
 
     reddit = authenticate()
 
-    subreddit = reddit.subreddit('test')
+    subreddit = reddit.subreddit('news')
     key_phrase = os.environ["bot_phrase"]
     key_response = os.environ["bot_response"]
 
