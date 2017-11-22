@@ -1,6 +1,5 @@
 import praw
 import os
-import re
 
 def authenticate():
     cid = os.environ["bot_client_id"]
@@ -16,12 +15,17 @@ def authenticate():
                          username=user_name)
     return reddit
 
-reddit = authenticate()
+def main():
 
-subreddit = reddit.subreddit('test')
-key_phrase = "hello world"
-key_response = "Foobar"
+    reddit = authenticate()
 
-for comment in subreddit.stream.comments():
-    if key_phrase in comment.body.lower():
-        print(key_response)
+    subreddit = reddit.subreddit('test')
+    key_phrase = os.environ["bot_phrase"]
+    key_response = os.environ["bot_response"]
+
+    for comment in subreddit.stream.comments():
+        if key_phrase in comment.body.lower():
+            comment.reply(key_response)
+
+if __name__ == "__main__":
+    main()
