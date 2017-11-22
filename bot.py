@@ -23,9 +23,9 @@ def main():
     key_phrase = os.environ["bot_phrase"]
     key_response = os.environ["bot_response"]
 
-    for comment in subreddit.stream.comments():
-        if key_phrase in comment.body.lower():
-            comment.reply(key_response)
+    for submission in subreddit.stream.submissions():
+        if key_phrase in submission.title.lower():
+            submission.reply(key_response)
 
 if __name__ == "__main__":
     main()
