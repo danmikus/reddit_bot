@@ -17,6 +17,11 @@ def authenticate():
     return reddit
 
 reddit = authenticate()
-my_subreddits = list(reddit.user.subreddits(limit=None))
 
-print(list(my_subreddits[1].stream.comments()))
+subreddit = reddit.subreddit('test')
+key_phrase = "hello world"
+key_response = "Foobar"
+
+for comment in subreddit.stream.comments():
+    if key_phrase in comment.body.lower():
+        print(key_response)
