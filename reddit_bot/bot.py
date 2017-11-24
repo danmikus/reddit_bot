@@ -1,5 +1,8 @@
 import praw
 import os
+from datetime import datetime, timedelta
+import time
+
 
 def authenticate():
     cid = os.environ["bot_client_id"]
@@ -18,12 +21,15 @@ def authenticate():
 def main():
 
     reddit = authenticate()
+    current = int(time.time())
+
+    previous = (current - (1000 * 60 * 60))
 
     subreddit = reddit.subreddit('test')
     key_phrase = os.environ["bot_phrase"]
     key_response = os.environ["bot_response"]
 
-    for submission in subreddit.stream.submissions():
+    for submission in subreddit.submissions(previous, current):
         if key_phrase in submission.title.lower():
             submission.reply(key_response)
 
