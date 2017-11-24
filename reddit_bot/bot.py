@@ -24,7 +24,7 @@ def main():
 
     previous = (current - (1000 * 60 * 60))
 
-    subreddit = reddit.subreddit('test')
+    subreddit = reddit.subreddit('news')
     key_phrase = os.environ["bot_phrase"]
     key_response = os.environ["bot_response"]
 
